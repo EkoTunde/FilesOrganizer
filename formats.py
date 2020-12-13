@@ -175,12 +175,17 @@ class Extensions(object):
         '.wpd':	'text/text_files'	 # WordPerfect document
     }
 
-    def dir_for(self, file: str):
-        if file.endswith(".tar.gz"):
-            return self.extensions[".tar.gz"]
-        else:
-            extension = file[file.rindex("."):]
-            if extension in self.extensions.keys():
-                return self.extensions[extension]
+    def dir_for(self, file_name: str):
+        print("file name is", file_name)
+        try:
+            if file_name.endswith(".tar.gz"):
+                return self.extensions[".tar.gz"]
             else:
-                return "other/not_listed"
+                extension = file_name[file_name.rindex("."):]
+                print("extension", extension)
+                if extension in self.extensions.keys():
+                    return self.extensions[extension]
+                else:
+                    return "other/not_listed"
+        except ValueError:
+            return "other/not_listed"
