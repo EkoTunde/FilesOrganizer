@@ -37,11 +37,14 @@ class Organizer(object):
             # If f is a file
             if os.path.isfile("{}/{}".format(os.getcwd(), f)) and f != "organizer.py":
 
+                print("file", f)
                 # organizer directory path
                 directory = e.dir_for(f)
+                print("directory '", directory, "'")
 
                 # if directory don't exist
                 if not self.dir_exists(directory):
+                    print("El directorio no existe.")
                     self.create_dir(directory)  # create it
 
                 # move file to organizer directory path
@@ -58,7 +61,7 @@ class Organizer(object):
         return
 
     def dir_exists(self, directory):
-        """Verifies directory existense.
+        """Verifies directory existence.
 
         Args:
             directory (str): directory to verify existence.
