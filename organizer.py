@@ -52,12 +52,15 @@ class Organizer(object):
 
             # If it is a path
             else:
-                # if f is a "organizer directory path" and the deepnes is not zero.
-                if f not in e.types or self.deepness > 0:
-                    self.deepness += 1          # increase deepnesresult_msg              self.organize(parent+"/"+f) # uses recursion to organize sub-directory
-                    os.chdir(path_name)         # move os to original path_name
-                    os.rmdir(parent+"/"+f)      # removes sub-directory
-                    self.deepness -= 1          # decreases deepness again
+                try:
+                    # if f is a "organizer directory path" and the deepnes is not zero.
+                    if f not in e.types or self.deepness > 0:
+                        self.deepness += 1          # increase deepnesresult_msg              self.organize(parent+"/"+f) # uses recursion to organize sub-directory
+                        os.chdir(path_name)         # move os to original path_name
+                        os.rmdir(parent+"/"+f)      # removes sub-directory
+                        self.deepness -= 1          # decreases deepness again
+                except OSError:
+                    pass
         return
 
     def dir_exists(self, directory):
